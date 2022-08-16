@@ -13,13 +13,21 @@ export class App extends Component {
     filter: '',
   };
 
-  contactsFilter = () => {
-    const curState = this.state.contacts;
-    console.log(curState);
+  contactsFilter = e => {
+    this.setState({ filter: e.target.value });
+    const { contacts, filter } = this.state;
+
+    const filteredCont = contacts.filter(el => {
+      // console.log(el.name.toLocaleLowerCase().includes(filter));
+      return el.name.toLocaleLowerCase().includes(filter);
+    });
+
+    console.log(this.state.filter);
+    return filteredCont;
   };
 
   formSubmitHandler = data => {
-    console.log(data);
+    // console.log(data);
     const newContact = {
       name: data.name,
       number: data.number,
@@ -36,7 +44,10 @@ export class App extends Component {
         onSubmit={this.formSubmitHandler}
         currentContacts={this.state.contacts}
       >
-        <Filter />
+        <Filter
+          contactsFilter={this.contactsFilter}
+          currentValue={this.state.filter}
+        />
       </Form>
     );
   }

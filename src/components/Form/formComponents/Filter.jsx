@@ -1,4 +1,4 @@
-export default function Filter({}) {
+export default function Filter({ contactsFilter, currentValue }) {
   return (
     <label>
       Find contacts by name
@@ -6,8 +6,8 @@ export default function Filter({}) {
       <input
         type="text"
         name="filter"
-        // value={this.state.filter}
-        // onChange={this.handleChange}
+        value={currentValue}
+        onChange={contactsFilter}
       />
     </label>
   );
