@@ -9,7 +9,13 @@ class Form extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.onSubmit(this.state);
+    this.renderContacts(this.props.currentContacts);
     this.reset();
+  };
+
+  renderContacts = arr => {
+    console.log(arr[0]);
+    return <li>{arr[0].name}</li>;
   };
 
   reset = () => {
@@ -41,6 +47,11 @@ class Form extends Component {
           </label>
           <button type="submit">Add contact</button>
         </form>
+
+        <div>
+          <h2>Contacts</h2>
+          <ul>{this.renderContact}</ul>
+        </div>
       </section>
     );
   }
