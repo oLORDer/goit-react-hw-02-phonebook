@@ -13,16 +13,18 @@ export class App extends Component {
     filter: '',
   };
 
-  contactsFilter = e => {
+  changeFilter = e => {
     this.setState({ filter: e.target.value });
+  };
+
+  contactsFilter = () => {
     const { contacts, filter } = this.state;
 
-    const filteredCont = contacts.filter(el => {
-      // console.log(el.name.toLocaleLowerCase().includes(filter));
-      return el.name.toLocaleLowerCase().includes(filter);
-    });
+    const filteredCont = contacts.filter(el =>
+      el.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
-    console.log(this.state.filter);
+    console.log(...filteredCont);
     return filteredCont;
   };
 
@@ -39,15 +41,16 @@ export class App extends Component {
   };
 
   render() {
+    const { filter } = this.state;
+    const bookInfo = this.contactsFilter();
+
+    /* <ContactForm ... /> */
+
+    /* <Filter ... /> */
+    /* <ContactList ... /> */
     return (
-      <Form
-        onSubmit={this.formSubmitHandler}
-        currentContacts={this.state.contacts}
-      >
-        <Filter
-          contactsFilter={this.contactsFilter}
-          currentValue={this.state.filter}
-        />
+      <Form onSubmit={this.formSubmitHandler} currentContacts={bookInfo}>
+        <Filter contactsFilter={this.changeFilter} currentValue={filter} />
       </Form>
     );
   }
