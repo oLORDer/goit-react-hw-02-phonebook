@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function Filter({ contactsFilter, currentValue }) {
   return (
     <label>
@@ -12,3 +14,8 @@ export default function Filter({ contactsFilter, currentValue }) {
     </label>
   );
 }
+
+Filter.propTypes = {
+  contactsFilter: PropTypes.func.isRequired,
+  currentValue: PropTypes.string.isRequired,
+};

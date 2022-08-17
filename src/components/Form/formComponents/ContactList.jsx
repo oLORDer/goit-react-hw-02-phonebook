@@ -1,13 +1,22 @@
-export default function ContactList() {
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import ContactItem from './ContactItem';
+
+export default function ContactList({ currentContacts }) {
   return (
     <div>
       <h2>Contacts</h2>
-      {this.props.children}
       <ul>
-        {contactsState.map(el => {
-          return <li key={nanoid()}>{`${el.name}: ${el.number}`}</li>;
+        {currentContacts.map(el => {
+          return (
+            <ContactItem key={nanoid()} name={el.name} number={el.number} />
+          );
         })}
       </ul>
     </div>
   );
 }
+
+ContactList.propTypes = {
+  currentContacts: PropTypes.array.isRequired,
+};

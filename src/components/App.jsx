@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Form from './Form/Form';
 import Filter from './Form/formComponents/Filter';
+import ContactList from './Form/formComponents/ContactList';
 
 export class App extends Component {
   state = {
@@ -24,12 +25,10 @@ export class App extends Component {
       el.name.toLowerCase().includes(filter.toLowerCase())
     );
 
-    console.log(...filteredCont);
     return filteredCont;
   };
 
   formSubmitHandler = data => {
-    // console.log(data);
     const newContact = {
       name: data.name,
       number: data.number,
@@ -37,21 +36,20 @@ export class App extends Component {
     this.setState(el => ({
       contacts: [newContact, ...el.contacts],
     }));
-    // console.log(this.state);
   };
 
   render() {
-    const { filter } = this.state;
+    const { contacts, filter } = this.state;
     const bookInfo = this.contactsFilter();
 
-    /* <ContactForm ... /> */
-
-    /* <Filter ... /> */
-    /* <ContactList ... /> */
     return (
-      <Form onSubmit={this.formSubmitHandler} currentContacts={bookInfo}>
+      <section>
+        <h1>Phonebook</h1>
+
+        <Form onSubmit={this.formSubmitHandler} contacts={contacts} />
         <Filter contactsFilter={this.changeFilter} currentValue={filter} />
-      </Form>
+        <ContactList currentContacts={bookInfo} />
+      </section>
     );
   }
 }
