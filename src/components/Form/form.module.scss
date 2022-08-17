@@ -17,3 +17,17 @@
   background-color: rgb(135, 221, 243);
   cursor: pointer;
 }
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.deleteBtn {
+  margin-left: 20px;
+  padding: 5px;
+  font-weight: 700;
+  cursor: pointer;
+}

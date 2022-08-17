@@ -32,9 +32,16 @@ export class App extends Component {
     const newContact = {
       name: data.name,
       number: data.number,
+      id: data.id,
     };
     this.setState(el => ({
       contacts: [newContact, ...el.contacts],
+    }));
+  };
+
+  deleteContact = e => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contacts => contacts.id !== e),
     }));
   };
 
@@ -48,7 +55,10 @@ export class App extends Component {
 
         <Form onSubmit={this.formSubmitHandler} contacts={contacts} />
         <Filter contactsFilter={this.changeFilter} currentValue={filter} />
-        <ContactList currentContacts={bookInfo} />
+        <ContactList
+          currentContacts={bookInfo}
+          deleteContact={this.deleteContact}
+        />
       </section>
     );
   }

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import s from './form.module.scss';
 
@@ -14,7 +15,9 @@ class Form extends Component {
       return;
     }
 
-    this.props.onSubmit(this.state);
+    const { name, number } = this.state;
+
+    this.props.onSubmit({ name, number, id: nanoid() });
     this.reset();
   };
 
@@ -22,10 +25,11 @@ class Form extends Component {
     const { contacts } = this.props;
     let isAlredyHasContact = false;
     let dublicatedName = null;
+    const normalizeName = this.state.name.toLowerCase();
 
     contacts.map(
       el =>
-        el.name.toLowerCase() === this.state.name.toLowerCase() &&
+        el.name.toLowerCase() === normalizeName &&
         ((isAlredyHasContact = true), (dublicatedName = el.name))
     );
 
@@ -37,7 +41,7 @@ class Form extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '', number: '', filter: '' });
+    this.setState({ name: '', number: '', id: '', filter: '' });
   };
 
   handleChange = e => {

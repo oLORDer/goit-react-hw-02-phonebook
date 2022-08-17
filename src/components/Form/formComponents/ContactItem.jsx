@@ -1,7 +1,17 @@
+import s from 'components/Form/form.module.scss';
 import PropTypes from 'prop-types';
 
-export default function ContactItem({ name, number }) {
-  return <li>{`${name}: ${number}`}</li>;
+export default function ContactItem({ name, number, id, deleteContact }) {
+  return (
+    <>
+      <li id={id} className={s.item}>
+        <div>{`${name}: ${number}`}</div>
+        <button className={s.deleteBtn} onClick={() => deleteContact(id)}>
+          delete
+        </button>
+      </li>
+    </>
+  );
 }
 
 ContactItem.propTypes = {
